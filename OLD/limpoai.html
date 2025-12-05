@@ -1,0 +1,1243 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Limpo Estofados | Higienização Profissional</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Reset e configurações gerais */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        :root {
+            --primary: #4a6cf7;
+            --primary-dark: #3a57d4;
+            --secondary: #6c757d;
+            --accent: #ff6b6b;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gradient: linear-gradient(135deg, #4a6cf7 0%, #6c757d 100%);
+            --gradient-dark: linear-gradient(135deg, #3a57d4 0%, #495057 100%);
+        }
+
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        body {
+            background-color: #ffffff;
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        /* Tipografia */
+        h1, h2, h3, h4 {
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        p {
+            line-height: 1.6;
+            color: var(--secondary);
+        }
+
+        .text-gradient {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        /* Header e Navegação */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 20px 5%;
+            transition: all 0.4s ease;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+
+        header.scrolled {
+            padding: 15px 5%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            font-size: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .cta-button {
+            background: var(--gradient);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(74, 108, 247, 0.3);
+            background: var(--gradient-dark);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding: 0 5%;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        .hero-content {
+            max-width: 600px;
+            z-index: 2;
+            position: relative;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            animation: slideInLeft 1s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            animation: slideInLeft 1s ease-out 0.2s both;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+
+        .hero-visual {
+            position: absolute;
+            right: 5%;
+            width: 50%;
+            height: 80%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .floating-element {
+            position: absolute;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            transition: transform 0.5s ease;
+        }
+
+        .floating-element img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .float-1 {
+            width: 300px;
+            height: 400px;
+            transform: rotate(-5deg);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .float-2 {
+            width: 250px;
+            height: 350px;
+            transform: rotate(8deg);
+            animation: float 7s ease-in-out infinite 0.5s;
+            z-index: 2;
+        }
+
+        .float-3 {
+            width: 200px;
+            height: 300px;
+            transform: rotate(-12deg);
+            animation: float 8s ease-in-out infinite 1s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(var(--rotation)); }
+            50% { transform: translateY(-20px) rotate(var(--rotation)); }
+        }
+
+        /* Seções gerais */
+        section {
+            padding: 100px 5%;
+            position: relative;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Serviços */
+        .services {
+            background: var(--light);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.4s ease;
+            opacity: 0;
+            transform: translateY(50px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            display: inline-block;
+            padding: 20px;
+            background: rgba(74, 108, 247, 0.1);
+            border-radius: 50%;
+        }
+
+        .service-card h3 {
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        /* Processo */
+        .process-steps {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+        }
+
+        .step {
+            text-align: center;
+            flex: 1;
+            min-width: 200px;
+            opacity: 0;
+            transform: translateX(-50px);
+        }
+
+        .step.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0 auto 20px;
+            position: relative;
+        }
+
+        .step-number::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            border: 2px dashed var(--primary);
+            border-radius: 50%;
+            animation: rotate 20s linear infinite;
+        }
+
+        /* Galeria */
+        .gallery {
+            background: var(--light);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            height: 300px;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.6s ease;
+        }
+
+        .gallery-item.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        /* Depoimentos */
+        .testimonials-slider {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin: 20px;
+            opacity: 0;
+            transform: translateX(100px);
+            transition: all 0.5s ease;
+        }
+
+        .testimonial-card.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .testimonial-card .quote {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        /* Contato */
+        .contact {
+            background: var(--gradient);
+            color: white;
+            text-align: center;
+        }
+
+        .contact h2, .contact p {
+            color: white;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 50px auto 0;
+            display: grid;
+            gap: 20px;
+        }
+
+        .form-group {
+            position: relative;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            background: white;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group textarea {
+            height: 150px;
+            resize: vertical;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 60px 5% 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Animações */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Responsividade */
+        @media (max-width: 1024px) {
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .hero-visual {
+                width: 40%;
+            }
+            
+            .float-1 { width: 250px; height: 350px; }
+            .float-2 { width: 200px; height: 300px; }
+            .float-3 { width: 150px; height: 250px; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+                background: none;
+                border: none;
+                font-size: 1.5rem;
+                color: var(--dark);
+                cursor: pointer;
+            }
+            
+            .hero {
+                flex-direction: column;
+                justify-content: center;
+                text-align: center;
+            }
+            
+            .hero-content {
+                max-width: 100%;
+            }
+            
+            .hero-visual {
+                position: relative;
+                right: 0;
+                width: 100%;
+                height: 300px;
+                margin-top: 40px;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero-buttons {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            section {
+                padding: 60px 5%;
+            }
+            
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Efeitos de Partículas */
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            background: var(--primary);
+            border-radius: 50%;
+            opacity: 0.3;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal.active {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            animation: slideInUp 0.5s ease;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--secondary);
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Menu Mobile */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 300px;
+            height: 100vh;
+            background: white;
+            z-index: 1001;
+            padding: 80px 30px;
+            transition: right 0.3s ease;
+            box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu .nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .mobile-menu .nav-links a {
+            font-size: 1.2rem;
+        }
+
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            display: none;
+        }
+
+        .menu-overlay.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <i class="fas fa-spray-can-sparkles"></i>
+                <span>Limpo Estofados</span>
+            </a>
+            
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#home">Início</a></li>
+                    <li><a href="#services">Serviços</a></li>
+                    <li><a href="#process">Processo</a></li>
+                    <li><a href="#gallery">Galeria</a></li>
+                    <li><a href="#testimonials">Depoimentos</a></li>
+                    <li><a href="#contact">Contato</a></li>
+                </ul>
+            </nav>
+            
+            <a href="#contact" class="cta-button">Solicitar Orçamento</a>
+            
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Menu Mobile -->
+    <div class="mobile-menu">
+        <ul class="nav-links">
+            <li><a href="#home">Início</a></li>
+            <li><a href="#services">Serviços</a></li>
+            <li><a href="#process">Processo</a></li>
+            <li><a href="#gallery">Galeria</a></li>
+            <li><a href="#testimonials">Depoimentos</a></li>
+            <li><a href="#contact">Contato</a></li>
+        </ul>
+    </div>
+    <div class="menu-overlay"></div>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="particles" id="particles"></div>
+        <div class="hero-content">
+            <h1>Higienização <span class="text-gradient">Profissional</span> de Estofados</h1>
+            <p>Tecnologia avançada e produtos ecológicos para renovar seus sofás, cadeiras, colchões e estofados em geral. Resultados visíveis desde a primeira aplicação.</p>
+            <div class="hero-buttons">
+                <a href="#contact" class="cta-button">Agendar Visita</a>
+                <a href="#services" class="cta-button" style="background: transparent; border: 2px solid var(--primary); color: var(--primary);">Ver Serviços</a>
+            </div>
+        </div>
+        
+        <div class="hero-visual">
+            <div class="floating-element float-1" style="--rotation: -5deg;">
+                <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Sofá limpo">
+            </div>
+            <div class="floating-element float-2" style="--rotation: 8deg;">
+                <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Limpeza profissional">
+            </div>
+            <div class="floating-element float-3" style="--rotation: -12deg;">
+                <img src="https://images.unsplash.com/photo-1616628188550-8d7518d2746c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Estofado renovado">
+            </div>
+        </div>
+    </section>
+
+    <!-- Serviços -->
+    <section id="services" class="services">
+        <div class="section-title">
+            <h2>Nossos <span class="text-gradient">Serviços</span></h2>
+            <p>Soluções completas para todos os tipos de estofados</p>
+        </div>
+        
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-couch"></i>
+                </div>
+                <h3>Limpeza de Sofás</h3>
+                <p>Higienização profunda com tecnologia a vapor e produtos hipoalergênicos. Remove ácaros, bactérias e odores.</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-bed"></i>
+                </div>
+                <h3>Colchões</h3>
+                <p>Eliminação completa de ácaros e alergênicos. Seu sono mais saudável e confortável.</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-chair"></i>
+                </div>
+                <h3>Cadeiras e Poltronas</h3>
+                <p>Limpeza especializada para escritórios, consultórios e residências.</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-car"></i>
+                </div>
+                <h3>Estofados Automotivos</h3>
+                <p>Bancos, carpetes e painéis. Devolvemos o aspecto de novo ao seu veículo.</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-building"></i>
+                </div>
+                <h3>Empresas</h3>
+                <p>Serviço corporativo para escritórios, hotéis, restaurantes e consultórios.</p>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>Proteção Antimanchas</h3>
+                <p>Aplicação de nanotecnologia que cria barreira invisível contra líquidos e sujeiras.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Processo -->
+    <section id="process" class="process">
+        <div class="section-title">
+            <h2>Nosso <span class="text-gradient">Processo</span></h2>
+            <p>Como transformamos seus estofados em 4 etapas simples</p>
+        </div>
+        
+        <div class="process-steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>Avaliação</h3>
+                <p>Análise do material e identificação dos pontos críticos</p>
+            </div>
+            
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>Pré-Limpeza</h3>
+                <p>Aspiração profunda e aplicação de solução específica</p>
+            </div>
+            
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>Higienização</h3>
+                <p>Extração com equipamento profissional a vapor</p>
+            </div>
+            
+            <div class="step">
+                <div class="step-number">4</div>
+                <h3>Proteção</h3>
+                <p>Aplicação de protetor e finalização com secagem rápida</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galeria -->
+    <section id="gallery" class="gallery">
+        <div class="section-title">
+            <h2>Antes & <span class="text-gradient">Depois</span></h2>
+            <p>Resultados que falam por si</p>
+        </div>
+        
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Limpeza de sofá">
+                <div class="gallery-overlay">
+                    <i class="fas fa-search-plus fa-3x" style="color: white;"></i>
+                </div>
+            </div>
+            
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1560184897-ae75f418493e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Colchão limpo">
+                <div class="gallery-overlay">
+                    <i class="fas fa-search-plus fa-3x" style="color: white;"></i>
+                </div>
+            </div>
+            
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1595428774223-ef52624120d2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Estofado automotivo">
+                <div class="gallery-overlay">
+                    <i class="fas fa-search-plus fa-3x" style="color: white;"></i>
+                </div>
+            </div>
+            
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1615876234886-fd9a39fda97f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Cadeira de escritório">
+                <div class="gallery-overlay">
+                    <i class="fas fa-search-plus fa-3x" style="color: white;"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Depoimentos -->
+    <section id="testimonials" class="testimonials">
+        <div class="section-title">
+            <h2>O Que <span class="text-gradient">Dizem</span></h2>
+            <p>Clientes satisfeitos com nossos serviços</p>
+        </div>
+        
+        <div class="testimonials-slider">
+            <div class="testimonial-card active">
+                <div class="quote">"</div>
+                <p>"Serviço impecável! Meu sofá ficou como novo. A equipe foi pontual, profissional e extremamente cuidadosa. Recomendo!"</p>
+                <h4>Maria Silva</h4>
+                <p class="text-gradient">Residencial - São Paulo</p>
+            </div>
+            
+            <div class="testimonial-card">
+                <div class="quote">"</div>
+                <p>"Contratamos para o escritório e superou expectativas. Todos os estofados ficaram renovados. Ótimo custo-benefício."</p>
+                <h4>Carlos Santos</h4>
+                <p class="text-gradient">Empresarial - Rio de Janeiro</p>
+            </div>
+            
+            <div class="testimonial-card">
+                <div class="quote">"</div>
+                <p>"Meu colchão estava com ácaros que causavam alergia. Depois da limpeza, meu sono melhorou 100%. Profissionais excelentes!"</p>
+                <h4>Ana Oliveira</h4>
+                <p class="text-gradient">Residencial - Belo Horizonte</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contato -->
+    <section id="contact" class="contact">
+        <div class="section-title">
+            <h2>Solicite Seu <span class="text-gradient">Orçamento</span></h2>
+            <p>Entre em contato para uma avaliação gratuita</p>
+        </div>
+        
+        <form class="contact-form" id="contactForm">
+            <div class="form-group">
+                <input type="text" placeholder="Seu nome" required>
+            </div>
+            
+            <div class="form-group">
+                <input type="tel" placeholder="Telefone" required>
+            </div>
+            
+            <div class="form-group">
+                <input type="email" placeholder="E-mail" required>
+            </div>
+            
+            <div class="form-group">
+                <textarea placeholder="Descreva seu serviço..." required></textarea>
+            </div>
+            
+            <button type="submit" class="cta-button" style="width: 100%;">Enviar Solicitação</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Limpo Estofados</h3>
+                <p>Especialistas em higienização profissional com tecnologia de ponta e compromisso com a qualidade.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Serviços</h3>
+                <ul style="list-style: none;">
+                    <li><a href="#services" style="color: #ccc; text-decoration: none;">Limpeza de Sofás</a></li>
+                    <li><a href="#services" style="color: #ccc; text-decoration: none;">Colchões</a></li>
+                    <li><a href="#services" style="color: #ccc; text-decoration: none;">Estofados Automotivos</a></li>
+                    <li><a href="#services" style="color: #ccc; text-decoration: none;">Proteção Antimanchas</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Contato</h3>
+                <p><i class="fas fa-phone"></i> (11) 99999-9999</p>
+                <p><i class="fas fa-envelope"></i> contato@limpoestofados.com</p>
+                <p><i class="fas fa-map-marker-alt"></i> São Paulo - SP</p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2024 Limpo Estofados. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Modal -->
+    <div class="modal" id="imageModal">
+        <div class="modal-content">
+            <button class="close-modal">&times;</button>
+            <img id="modalImage" src="" alt="" style="width: 100%; border-radius: 10px;">
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Header scroll effect
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+            // Mobile menu
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            const menuOverlay = document.querySelector('.menu-overlay');
+            const mobileLinks = document.querySelectorAll('.mobile-menu a');
+
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.add('active');
+                menuOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+
+            menuOverlay.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                menuOverlay.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.remove('active');
+                    menuOverlay.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                });
+            });
+
+            // Scroll animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
+
+            // Observe elements
+            document.querySelectorAll('.service-card, .step, .gallery-item').forEach(el => {
+                observer.observe(el);
+            });
+
+            // Testimonial slider
+            let currentTestimonial = 0;
+            const testimonials = document.querySelectorAll('.testimonial-card');
+            
+            function showTestimonial(index) {
+                testimonials.forEach((card, i) => {
+                    card.classList.remove('active');
+                    if (i === index) {
+                        setTimeout(() => {
+                            card.classList.add('active');
+                        }, 100);
+                    }
+                });
+            }
+            
+            setInterval(() => {
+                currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+                showTestimonial(currentTestimonial);
+            }, 5000);
+
+            // Gallery modal
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            const modal = document.getElementById('imageModal');
+            const modalImage = document.getElementById('modalImage');
+            const closeModal = document.querySelector('.close-modal');
+
+            galleryItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    const imgSrc = item.querySelector('img').src;
+                    modalImage.src = imgSrc;
+                    modal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+
+            closeModal.addEventListener('click', () => {
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+
+            // Form submission
+            const contactForm = document.getElementById('contactForm');
+            contactForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                alert('Obrigado! Em breve entraremos em contato para fornecer seu orçamento.');
+                contactForm.reset();
+            });
+
+            // Create particles
+            function createParticles() {
+                const particlesContainer = document.getElementById('particles');
+                const particleCount = 30;
+
+                for (let i = 0; i < particleCount; i++) {
+                    const particle = document.createElement('div');
+                    particle.classList.add('particle');
+                    
+                    const size = Math.random() * 10 + 5;
+                    const posX = Math.random() * 100;
+                    const posY = Math.random() * 100;
+                    const duration = Math.random() * 20 + 10;
+                    const delay = Math.random() * 5;
+                    
+                    particle.style.width = `${size}px`;
+                    particle.style.height = `${size}px`;
+                    particle.style.left = `${posX}%`;
+                    particle.style.top = `${posY}%`;
+                    particle.style.opacity = Math.random() * 0.5 + 0.1;
+                    particle.style.animation = `float ${duration}s ease-in-out infinite`;
+                    particle.style.animationDelay = `${delay}s`;
+                    
+                    particlesContainer.appendChild(particle);
+                }
+            }
+
+            createParticles();
+
+            // Smooth scroll for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        const headerHeight = header.offsetHeight;
+                        const targetPosition = targetElement.offsetTop - headerHeight;
+                        
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Floating elements hover effect
+            const floatingElements = document.querySelectorAll('.floating-element');
+            floatingElements.forEach(element => {
+                element.addEventListener('mouseenter', () => {
+                    element.style.transform = 'scale(1.05) rotate(0deg)';
+                });
+                
+                element.addEventListener('mouseleave', () => {
+                    const rotation = element.style.getPropertyValue('--rotation');
+                    element.style.transform = `rotate(${rotation})`;
+                });
+            });
+        });
+    </script>
+</body>
+</html>
