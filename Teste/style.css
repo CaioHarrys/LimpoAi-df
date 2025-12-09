@@ -312,37 +312,40 @@
     font-size: 1.2rem;
 }
 
-/* Card da imagem */
-.hero-image-container {
-    position: relative;
-    z-index: 3;
-}
+/* ================================
+   CORREÇÕES DOS BADGES E REVIEW CARD
+================================ */
 
+/* Card da imagem - Aumentar z-index */
 .hero-card {
     position: relative;
-    transform-style: preserve-3d;
-    perspective: 1000px;
+    /* Ajustei para remover as propriedades 3D que podem afetar o empilhamento em navegadores */
+    /* transform-style: preserve-3d; */ 
+    /* perspective: 1000px; */ 
+    z-index: 10; 
 }
 
 .main-image {
     position: relative;
     border-radius: 24px;
     overflow: hidden;
-    transform: rotateY(-10deg) rotateX(5deg);
+    /* Ajustei a rotação para ser mais sutil e permitir melhor visualização do card de review */
+    transform: rotateY(-5deg) rotateX(3deg);
     box-shadow: 
         -40px 40px 80px rgba(0, 0, 0, 0.4),
         0 0 100px rgba(74, 108, 247, 0.2),
         inset 0 0 60px rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.1);
     animation: float-card 8s ease-in-out infinite;
+    z-index: 15; /* Aumentado para garantir que a imagem não sobreponha acidentalmente os badges ou o card de review */
 }
 
 @keyframes float-card {
     0%, 100% {
-        transform: rotateY(-10deg) rotateX(5deg) translateY(0);
+        transform: rotateY(-5deg) rotateX(3deg) translateY(0);
     }
     50% {
-        transform: rotateY(-8deg) rotateX(3deg) translateY(-20px);
+        transform: rotateY(-3deg) rotateX(1deg) translateY(-20px);
     }
 }
 
@@ -352,10 +355,10 @@
     display: block;
 }
 
-/* Badges na imagem */
+/* Badges na imagem - Aumentar z-index e ajustar posições */
 .image-badge {
     position: absolute;
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.95); 
     backdrop-filter: blur(10px);
     border-radius: 50px;
     padding: 0.6rem 1rem;
@@ -363,28 +366,30 @@
     align-items: center;
     gap: 0.5rem;
     box-shadow: 
-        0 10px 30px rgba(0, 0, 0, 0.2),
-        0 0 20px rgba(74, 108, 247, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+        0 10px 30px rgba(0, 0, 0, 0.3), 
+        0 0 20px rgba(74, 108, 247, 0.15);
+    border: 2px solid rgba(255, 255, 255, 0.3); 
     animation: badge-float 6s ease-in-out infinite;
-    z-index: 10;
+    z-index: 20; /* Garantir que estejam na frente da imagem (z-index: 15) */
+    /* Usar o próprio 'transform' na animação para evitar conflitos com a posição */
 }
 
+/* Posições ajustadas para ficarem completamente visíveis */
 .badge-1 {
-    top: 10%;
-    right: -20px;
+    top: 15%; 
+    right: -50px; /* Ajustado para mover mais para fora e ser totalmente visível */
     animation-delay: 0s;
 }
 
 .badge-2 {
-    top: 50%;
-    left: -20px;
+    top: 45%; 
+    left: -50px; /* Ajustado para mover mais para fora e ser totalmente visível */
     animation-delay: 1s;
 }
 
 .badge-3 {
-    bottom: 20%;
-    right: -15px;
+    bottom: 15%; 
+    right: -45px; /* Ajustado para mover mais para fora e ser totalmente visível */
     animation-delay: 2s;
 }
 
@@ -402,39 +407,42 @@
     align-items: center;
     gap: 0.5rem;
     color: var(--primary-dark);
-    font-weight: 600;
+    font-weight: 700; 
     font-size: 0.9rem;
+    white-space: nowrap; 
 }
 
 .badge-content i {
     color: var(--success);
-    font-size: 1rem;
+    font-size: 1.1rem; 
 }
 
-/* Card de avaliação */
+/* Card de avaliação - Ajustar posição e z-index */
 .review-card {
     position: absolute;
-    bottom: -40px;
-    left: 30px;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(20px);
+    bottom: -30px; 
+    left: -80px; /* Ajustado para mover mais para a esquerda, conforme a imagem de referência */
+    background: rgba(255, 255, 255, 0.98); 
+    backdrop-filter: blur(25px); 
     border-radius: 20px;
     padding: 1.5rem;
     width: 280px;
     box-shadow: 
-        0 30px 60px rgba(0, 0, 0, 0.3),
-        0 0 40px rgba(74, 108, 247, 0.15);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+        0 40px 80px rgba(0, 0, 0, 0.4), 
+        0 0 50px rgba(74, 108, 247, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.3); 
     animation: review-float 7s ease-in-out infinite;
-    z-index: 20;
+    z-index: 25; /* Maior que os badges (z-index: 20) e a imagem (z-index: 15) */
+    transform: rotate(-5deg); 
 }
 
+/* Ajuste na animação do review card */
 @keyframes review-float {
     0%, 100% {
-        transform: translateY(0) rotate(-2deg);
+        transform: translateY(0) rotate(-5deg);
     }
     50% {
-        transform: translateY(-15px) rotate(0deg);
+        transform: translateY(-15px) rotate(-3deg);
     }
 }
 
@@ -673,7 +681,7 @@
     position: absolute;
     top: 20px;
     padding: 10px 25px;
-    border-radius: 30px;
+    border-radius: 60px;
     font-weight: bold;
     z-index: 20;
     pointer-events: none;
@@ -682,14 +690,20 @@
     color: white;
 }
 
-.label.before { left: 20px; }
-.label.after { right: 20px; }
+.label.before { 
+    left: 20px;
+    background-color: whitesmoke;
+    pointer-events: none; 
+    color: blue;
+}
+.label.after { 
+    right: 20px;
+    background-color: blue; 
+}
 
 /* ================================
    OUTROS ESTILOS
 ================================ */
-
-/* HERO original (removido) */
 
 .hover-lift {
     transition: transform 0.4s, box-shadow 0.4s;
@@ -748,16 +762,34 @@
         animation: none;
     }
     
+    .badge-1 {
+        top: 10%;
+        right: -15px;
+    }
+    
+    .badge-2 {
+        top: 40%;
+        left: -15px;
+    }
+    
+    .badge-3 {
+        bottom: 10%;
+        right: -10px;
+    }
+    
     .review-card {
         position: relative;
         bottom: 0;
         left: 0;
-        margin-top: -30px;
+        margin-top: -20px;
         width: 100%;
+        transform: rotate(0deg);
+        animation: none;
     }
     
-    .image-badge {
-        display: none;
+    .badge-content {
+        font-size: 0.8rem;
+        padding: 0.4rem 0.8rem;
     }
     
     .stats-container {
@@ -808,6 +840,22 @@
     .btn-lg {
         padding: 0.8rem 2rem !important;
     }
+    
+    .image-badge {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.8rem;
+    }
+    
+    .badge-1,
+    .badge-2,
+    .badge-3 {
+        display: none; /* Esconder badges em telas muito pequenas */
+    }
+    
+    .review-card {
+        margin-top: 1rem;
+        padding: 1rem;
+    }
 }
 
 @media (max-width: 576px) {
@@ -825,4 +873,50 @@
         font-size: 0.8rem;
         padding: 0.6rem 1rem;
     }
+    
+    .process-step {
+        width: 80px;
+        height: 80px;
+        font-size: 2rem;
+    }
+}
+
+/* Animações de entrada para elementos */
+[data-aos] {
+    transition-property: transform, opacity;
+}
+
+/* Estilos gerais para melhor legibilidade */
+body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+/* Melhorias na acessibilidade */
+.btn:focus,
+.form-control:focus,
+.form-select:focus {
+    box-shadow: 0 0 0 0.25rem rgba(74, 108, 247, 0.25);
+    border-color: var(--primary);
+}
+
+/* Transições suaves para hover */
+a, button, .hover-lift {
+    transition: all 0.3s ease;
+}
+
+/* Ajustes no footer */
+footer {
+    background: linear-gradient(135deg, #1a1f3a 0%, #0a0e2a 100%) !important;
+}
+
+/* Efeito de parallax sutil */
+.hero-section .container {
+    position: relative;
+    z-index: 5;
 }

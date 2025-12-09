@@ -115,3 +115,8 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         }
     });
 });
+
+// Inicializar AOS
+if (typeof AOS !== 'undefined') {
+    AOS.init({ duration: 1000, once: true });
+}
