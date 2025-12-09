@@ -379,26 +379,27 @@
     top: 15%; 
     right: -50px; /* Ajustado para mover mais para fora e ser totalmente visível */
     animation-delay: 0s;
+    transform: rotate(-5deg) !important;
 }
 
 .badge-2 {
     top: 45%; 
     left: -50px; /* Ajustado para mover mais para fora e ser totalmente visível */
-    animation-delay: 1s;
+    animation-delay: 0s;
 }
 
 .badge-3 {
     bottom: 15%; 
     right: -45px; /* Ajustado para mover mais para fora e ser totalmente visível */
-    animation-delay: 2s;
+    animation-delay: 0s;
 }
 
 @keyframes badge-float {
     0%, 100% {
-        transform: translateY(0);
+        transform: translateY(0) rotate(-10deg);
     }
     50% {
-        transform: translateY(-10px);
+        transform: translateY(-10px) rotate(-5deg);
     }
 }
 
