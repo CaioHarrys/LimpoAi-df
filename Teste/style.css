@@ -3,6 +3,7 @@
     --primary-dark: #3a57d4;
     --gradient: linear-gradient(135deg, #4a6cf7 0%, #6c757d 100%);
     --text-gradient: linear-gradient(135deg, #4a6cf7, #ff6b6b);
+    --badge-red: rgba(255, 71, 87, 0.9);
 }
 
 .text-gradient {
@@ -12,6 +13,7 @@
     color: transparent;
 }
 
+/* HERO */
 .hero {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
@@ -41,9 +43,10 @@
 
 .hover-lift:hover {
     transform: translateY(-12px);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.15) !important;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15) !important;
 }
 
+/* PROCESSO */
 .process-step {
     width: 100px;
     height: 100px;
@@ -56,24 +59,33 @@
     justify-content: center;
     font-size: 2.5rem;
     font-weight: bold;
-    box-shadow: 0 10px 30px rgba(74,108,247,0.4);
+    box-shadow: 0 10px 30px rgba(74, 108, 247, 0.4);
 }
 
-/* ANTES & DEPOIS PREMIUM */
+/* ================================
+   ANTES & DEPOIS — CORRIGIDO
+================================ */
+
 .comparison-box {
     position: relative;
     height: 420px;
     border-radius: 20px;
     overflow: hidden;
     background: #000;
+    user-select: none;
 }
 
 .comparison-slider {
     position: relative;
     width: 100%;
     height: 100%;
-    overflow: hidden;
     cursor: ew-resize;
+    user-select: none;
+}
+
+.comparison-slider * {
+    user-select: none;
+    -webkit-user-drag: none;
 }
 
 .comparison-slider img {
@@ -83,73 +95,99 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: opacity 0.4s;
+    pointer-events: none;
 }
 
-.comparison-slider .after {
-    clip-path: polygon(50% 0%, 100% 0%, 100% 100%, 50% 100%);
+/* Containers para organizar as imagens */
+.before-container,
+.after-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
 }
 
+.before-container {
+    z-index: 3;
+    clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
+}
+
+.after-container {
+    z-index: 2;
+}
+
+/* Handle */
 .handle {
     position: absolute;
-    top: 50%;
+    top: 0;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translateX(-50%);
     width: 70px;
-    height: 70px;
+    height: 100%;
+    z-index: 10;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.handle i {
+    width: 65px;
+    height: 65px;
     background: white;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.8rem;
+    font-size: 1.7rem;
     color: var(--primary);
-    box-shadow: 0 0 30px rgba(0,0,0,0.5);
-    z-index: 10;
-    pointer-events: none;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.6);
+    z-index: 12;
 }
 
 .handle::before {
-    content: '';
+    content: "";
     position: absolute;
-    width: 4px;
-    height: 600px;
+    width: 6px;
+    height: 100%;
     background: white;
-    opacity: 0.8;
+    opacity: 0.9;
+    z-index: 5;
 }
 
+/* BADGES */
 .label {
     position: absolute;
     top: 20px;
     padding: 10px 25px;
     border-radius: 30px;
     font-weight: bold;
-    z-index: 5;
-    font-size: 0.9rem;
+    z-index: 20;
+    pointer-events: none;
+    font-size: 1rem;
+    background: var(--badge-red);
+    color: white;
 }
 
 .label.before {
     left: 20px;
-    background: rgba(255,71,87,0.9);
-    color: white;
 }
 
 .label.after {
     right: 20px;
-    background: rgba(74,108,247,0.9);
-    color: white;
 }
 
-.particles {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    background-image: 
-        radial-gradient(circle at 20% 80%, rgba(255,255,255,0.1) 0%, transparent 30%),
-        radial-gradient(circle at 80% 20%, rgba(74,108,247,0.15) 0%, transparent 40%);
-}
-
+/* Responsividade */
 @media (max-width: 768px) {
-    .comparison-box { height: 300px; }
-    .handle { width: 55px; height: 55px; font-size: 1.4rem; }
+    .comparison-box {
+        height: 300px;
+    }
+
+    .handle i {
+        width: 50px;
+        height: 50px;
+        font-size: 1.3rem;
+    }
 }
