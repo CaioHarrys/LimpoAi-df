@@ -85,7 +85,8 @@ function animateCounter() {
                 counter.textContent = Math.floor(current);
                 setTimeout(updateCounter, 20);
             } else {
-                counter.textContent = target + (counter.getAttribute('data-count') > 99 ? '+' : '');
+                // AQUI
+                counter.textContent = target + (counter.getAttribute('data-count') > 99 ? '+' : ''); 
             }
         };
         
@@ -93,10 +94,58 @@ function animateCounter() {
     });
 }
 
+// Função para ajustar badges e elementos responsivos
+function adjustResponsiveElements() {
+    const width = window.innerWidth;
+    const badges = document.querySelectorAll('.image-badge');
+    
+    // Ajustar badges para diferentes tamanhos de tela
+    if (width <= 400) {
+        // Telas muito pequenas
+        badges.forEach(badge => {
+            badge.style.transform = 'scale(0.5)';
+            badge.style.padding = '0.2rem 0.4rem';
+            badge.style.fontSize = '0.55rem';
+        });
+    } else if (width <= 576) {
+        // Mobile pequeno
+        badges.forEach(badge => {
+            badge.style.transform = 'scale(0.6)';
+            badge.style.padding = '0.3rem 0.6rem';
+            badge.style.fontSize = '0.6rem';
+        });
+    } else if (width <= 768) {
+        // Mobile
+        badges.forEach(badge => {
+            badge.style.transform = 'scale(0.7)';
+            badge.style.padding = '0.4rem 0.8rem';
+            badge.style.fontSize = '0.7rem';
+        });
+    } else if (width <= 992) {
+        // Tablet
+        badges.forEach(badge => {
+            badge.style.transform = 'scale(0.8)';
+            badge.style.padding = '0.6rem 1rem';
+            badge.style.fontSize = '0.8rem';
+        });
+    } else {
+        // Desktop
+        badges.forEach(badge => {
+            badge.style.transform = '';
+            badge.style.padding = '';
+            badge.style.fontSize = '';
+        });
+    }
+}
+
 // Inicia o contador quando a página carrega
 document.addEventListener('DOMContentLoaded', () => {
     setTimeout(animateCounter, 1000);
+    adjustResponsiveElements(); // Ajustar elementos na inicialização
 });
+
+// Executar ajustes ao redimensionar
+window.addEventListener('resize', adjustResponsiveElements);
 
 // Animação de scroll suave
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
