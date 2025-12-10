@@ -46,6 +46,7 @@
     color: white;
     position: relative;
     overflow: hidden;
+    padding-bottom: 3rem;
 }
 
 /* Gradiente animado */
@@ -201,6 +202,7 @@
 /* Badge promocional */
 .promo-badge {
     animation: pulse 2s infinite;
+    margin-top: 15vh !important;
 }
 
 .badge-pulse {
@@ -898,6 +900,9 @@
 }
 
 @media (max-width: 576px) {
+    .row-a{
+        
+    }
     .hero-title {
         font-size: 1.8rem;
     }
